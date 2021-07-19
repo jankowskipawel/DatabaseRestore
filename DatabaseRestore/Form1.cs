@@ -73,11 +73,13 @@ namespace DatabaseRestore
                 commands.Add(cmdText);
                 RunCommands(commands);
                 //ADD postgres/bin to PATH
+                MessageBox.Show("Database restored successfully");
             }
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
+
         }
 
         static void RunCommands(List<string> cmds, string workingDirectory = "")
