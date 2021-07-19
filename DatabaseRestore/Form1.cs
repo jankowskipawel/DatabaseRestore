@@ -115,7 +115,7 @@ namespace DatabaseRestore
                 throw new ArgumentException("File path cannot be empty");
             }
 
-            if (!File.Exists(path) || !IsPathValid(path) || !path.EndsWith(".backup"))
+            if (!File.Exists(path) || !IsPathValid(path))
             {
                 throw new ArgumentException($"{path} is not a valid file");
             }
