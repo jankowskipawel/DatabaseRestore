@@ -95,9 +95,9 @@ namespace DatabaseRestore
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(25, 160);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(117, 15);
+            this.label5.Size = new System.Drawing.Size(114, 15);
             this.label5.TabIndex = 5;
-            this.label5.Text = ".backup file location:";
+            this.label5.Text = "Backup file location:";
             // 
             // portTextBox
             // 
@@ -192,7 +192,7 @@ namespace DatabaseRestore
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ipTextBox);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Database restore";
             this.ResumeLayout(false);
             this.PerformLayout();
 
