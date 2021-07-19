@@ -42,14 +42,13 @@ namespace DatabaseRestore
                 CheckFilePath(backupPath);
                 await using var conn = new NpgsqlConnection(connString);
                 await conn.OpenAsync();
-                //get tables
+                //check if database is empty
                 using (var cmd = new NpgsqlCommand("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' ORDER BY table_name; ; ", conn))
                 using (var reader = cmd.ExecuteReader())
                 {
                     reader.Read();
                     if (reader.HasRows)
                     {
-                        //check if database exists, if exists ask if continue or not
                         DialogResult dialogResult = MessageBox.Show("Database is not empty. Do you want to continue?", "Database restore", MessageBoxButtons.YesNo);
                         if (dialogResult == DialogResult.No)
                         {
@@ -67,12 +66,12 @@ namespace DatabaseRestore
                 {
                     cmd1.ExecuteNonQuery();
                 }
+                //use pg_restore to restore database
                 List<string> commands = new List<string>(2);
                 string cmdText = $"pg_restore -U {username} -h {host} -p {port} -d {databaseName} -1 --disable-triggers {backupPath}";
                 commands.Add($"set \"PGPASSWORD={password}\"");
                 commands.Add(cmdText);
                 RunCommands(commands);
-                //ADD postgres/bin to PATH
                 MessageBox.Show("Database restored successfully");
             }
             catch (Exception exception)
