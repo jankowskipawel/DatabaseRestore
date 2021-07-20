@@ -44,6 +44,7 @@ namespace DatabaseRestore
             this.backupFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.databaseNameTextBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.pgrestoreFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // ipTextBox
@@ -113,7 +114,6 @@ namespace DatabaseRestore
             this.loginTextBox.Name = "loginTextBox";
             this.loginTextBox.Size = new System.Drawing.Size(138, 23);
             this.loginTextBox.TabIndex = 7;
-            this.loginTextBox.Text = "postgres";
             // 
             // passwordTextBox
             // 
@@ -122,7 +122,6 @@ namespace DatabaseRestore
             this.passwordTextBox.PasswordChar = '*';
             this.passwordTextBox.Size = new System.Drawing.Size(134, 23);
             this.passwordTextBox.TabIndex = 8;
-            this.passwordTextBox.Text = "Test123!@#";
             // 
             // backupPathTextBox
             // 
@@ -172,6 +171,10 @@ namespace DatabaseRestore
             this.label6.TabIndex = 13;
             this.label6.Text = "Database name:";
             // 
+            // pgrestoreFileDialog
+            // 
+            this.pgrestoreFileDialog.FileName = "pg_restore.exe";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -215,6 +218,7 @@ namespace DatabaseRestore
         private System.Windows.Forms.OpenFileDialog backupFileDialog;
         private System.Windows.Forms.TextBox databaseNameTextBox;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.OpenFileDialog pgrestoreFileDialog;
     }
 }
 

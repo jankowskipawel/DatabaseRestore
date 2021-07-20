@@ -68,7 +68,15 @@ namespace DatabaseRestore
                 }
                 //use pg_restore to restore database
                 List<string> commands = new List<string>(2);
-                string cmdText = $"pg_restore -U {username} -h {host} -p {port} -d {databaseName} -1 --disable-triggers {backupPath}";
+                string path = "E:\\Program Files\\PostgreSQL\\9.6\\bin\\pg_restore.exe";
+                while (!IsFilePathCorrect(path))
+                {
+                    MessageBox.Show(
+                        "Couldn't find pg_restore.exe. Please specify path to pg_restore.exe located in bin directory of your PostgreSQL installation.");
+                    pgrestoreFileDialog.ShowDialog();
+                    path = pgrestoreFileDialog.FileName.Trim();
+                }
+                string cmdText = '"' + $"{path.Replace('\\','/')}" + '"' + $" -U {username} -h {host} -p {port} -d {databaseName} -1 --disable-triggers {backupPath}";
                 commands.Add($"set \"PGPASSWORD={password}\"");
                 commands.Add(cmdText);
                 RunCommands(commands);
@@ -124,6 +132,15 @@ namespace DatabaseRestore
         {
             HashSet<char> invalidCharacters = new HashSet<char>(Path.GetInvalidPathChars());
             return !string.IsNullOrEmpty(filePath) && !filePath.Any(pc => invalidCharacters.Contains(pc));
+        }
+
+        public static bool IsFilePathCorrect(string path)
+        {
+            if (!File.Exists(path) || !IsPathValid(path) || path.Length == 0 || path.Split('\\').Last()!="pg_restore.exe")
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
